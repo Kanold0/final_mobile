@@ -20,6 +20,7 @@ import 'package:pikrous/presentation/pages/calendar_page.dart';
 import 'package:pikrous/presentation/pages/all_dietbete_page.dart';
 import 'package:pikrous/presentation/pages/diet_food.dart';
 import 'package:pikrous/presentation/pages/vegan_page.dart';
+import 'package:pikrous/presentation/pages/elderly_food.dart';
 
 import '../items/bottom_nav_bar.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +35,7 @@ class HomePage extends StatefulWidget {
 List<String> categories = [
   'All',
   'Diet Food',
-  'Old Food',
+  'Elderly Food',
   'Vegan Food',
   'Dietbete Food',
 ];
@@ -375,6 +376,11 @@ class _HomePageState extends State<HomePage> {
                                                 builder: ((context) =>
                                                     DietFoodPage())));
                                       } else if (index == 2) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    ElderlyFoodPage())));
                                       } else if (index == 3) {
                                         Navigator.push(
                                             context,
@@ -426,7 +432,9 @@ class _HomePageState extends State<HomePage> {
                               height: 200,
                             ),
                             InkWell(
-                              onTap: () {
+                              onTap: (
+                                
+                              ) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

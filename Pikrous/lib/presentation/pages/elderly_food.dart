@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DietFoodPage extends StatelessWidget {
+class ElderlyFoodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +11,7 @@ class DietFoodPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text('Diet Food'),
+        title: Text('Elderly Food'),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
@@ -34,20 +34,20 @@ class DietFoodPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: _buildFoodContainer(
-                    imagePath: 'assets/food_image1.png',
-                    foodName: 'Healthy Salad',
+                    imagePath: 'assets/food_image5.png',
+                    foodName: 'Porridge',
                     onPressed: () {
-                      // Handle detail button pressed for Healthy Salad
+                      // Handle detail button pressed for Porridge
                     },
                   ),
                 ),
                 SizedBox(width: 20),
                 Expanded(
                   child: _buildFoodContainer(
-                    imagePath: 'assets/food_image2.png',
-                    foodName: 'Fruit Bowl',
+                    imagePath: 'assets/food_image6.png',
+                    foodName: 'Mashed Potatoes',
                     onPressed: () {
-                      // Handle detail button pressed for Fruit Bowl
+                      // Handle detail button pressed for Mashed Potatoes
                     },
                   ),
                 ),
@@ -58,20 +58,20 @@ class DietFoodPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: _buildFoodContainer(
-                    imagePath: 'assets/food_image3.png',
-                    foodName: 'Grilled Chicken',
+                    imagePath: 'assets/food_image7.png',
+                    foodName: 'Steamed Vegetables',
                     onPressed: () {
-                      // Handle detail button pressed for Grilled Chicken
+                      // Handle detail button pressed for Steamed Vegetables
                     },
                   ),
                 ),
                 SizedBox(width: 20),
                 Expanded(
                   child: _buildFoodContainer(
-                    imagePath: 'assets/food_image4.png',
-                    foodName: 'Vegetable Soup',
+                    imagePath: 'assets/food_image8.png',
+                    foodName: 'Fish Soup',
                     onPressed: () {
-                      // Handle detail button pressed for Vegetable Soup
+                      // Handle detail button pressed for Fish Soup
                     },
                   ),
                 ),

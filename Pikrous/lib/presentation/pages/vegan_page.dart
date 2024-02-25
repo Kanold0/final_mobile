@@ -1,6 +1,31 @@
 import 'package:flutter/material.dart';
 
-class VeganFoodPage extends StatelessWidget {
+class VeganFoodPage extends StatefulWidget {
+  @override
+  _VeganFoodPageState createState() => _VeganFoodPageState();
+}
+
+class _VeganFoodPageState extends State<VeganFoodPage> {
+  late List<String> foods;
+  late List<String> filteredFoods;
+
+  TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    foods = ['Quinoa Salad', 'Avocado Toast', 'Chickpea Curry', 'Veggie Burger'];
+    filteredFoods = List.from(foods);
+    _searchController.addListener(_onSearchChanged);
+  }
+
+  void _onSearchChanged() {
+    String searchTerm = _searchController.text.toLowerCase();
+    setState(() {
+      filteredFoods = foods.where((food) => food.toLowerCase().contains(searchTerm)).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,65 +38,41 @@ class VeganFoodPage extends StatelessWidget {
         ),
         title: Text('Vegan Food'),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: _buildFoodContainer(
-                    imagePath: 'assets/vegan_food_image1.png',
-                    foodName: 'Quinoa Salad',
-                    onPressed: () {
-                      // Handle detail button pressed for Quinoa Salad
-                    },
-                  ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Search Food',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: _buildFoodContainer(
-                    imagePath: 'assets/vegan_food_image2.png',
-                    foodName: 'Avocado Toast',
-                    onPressed: () {
-                      // Handle detail button pressed for Avocado Toast
-                    },
-                  ),
-                ),
-              ],
+              ),
             ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildFoodContainer(
-                    imagePath: 'assets/vegan_food_image3.png',
-                    foodName: 'Chickpea Curry',
-                    onPressed: () {
-                      // Handle detail button pressed for Chickpea Curry
-                    },
-                  ),
-                ),
-                SizedBox(width: 20),
-                Expanded(
-                  child: _buildFoodContainer(
-                    imagePath: 'assets/vegan_food_image4.png',
-                    foodName: 'Veggie Burger',
-                    onPressed: () {
-                      // Handle detail button pressed for Veggie Burger
-                    },
-                  ),
-                ),
-              ],
+          ),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: MediaQuery.of(context).size.width ~/ 150, // Adjusted based on screen width
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: filteredFoods.length,
+              itemBuilder: (context, index) {
+                return _buildFoodItem(filteredFoods[index]);
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildFoodContainer({required String imagePath, required String foodName, required VoidCallback onPressed}) {
+  Widget _buildFoodItem(String foodName) {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -90,9 +91,9 @@ class VeganFoodPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            imagePath,
-            width: 100,
-            height: 100,
+            'assets/vegan_food_placeholder.png',
+            width: 80,
+            height: 80,
             fit: BoxFit.cover,
           ),
           SizedBox(height: 10),
@@ -106,7 +107,9 @@ class VeganFoodPage extends StatelessWidget {
           ),
           SizedBox(height: 10),
           ElevatedButton(
-            onPressed: onPressed,
+            onPressed: () {
+              // Handle detail button pressed
+            },
             child: Text('Details'),
           ),
         ],
