@@ -19,6 +19,7 @@ import 'package:pikrous/presentation/pages/doctors/view_all_doctor.dart';
 import 'package:pikrous/presentation/pages/calendar_page.dart';
 import 'package:pikrous/presentation/pages/all_dietbete_page.dart';
 import 'package:pikrous/presentation/pages/diet_food.dart';
+import 'package:pikrous/presentation/pages/vegan_page.dart';
 
 import '../items/bottom_nav_bar.dart';
 import 'package:http/http.dart' as http;
@@ -375,6 +376,11 @@ class _HomePageState extends State<HomePage> {
                                                     DietFoodPage())));
                                       } else if (index == 2) {
                                       } else if (index == 3) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    VeganFoodPage())));
                                       } else if (index == 4) {
                                         Navigator.push(
                                             context,
