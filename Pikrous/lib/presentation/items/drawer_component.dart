@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pikrous/helper/utils/preference.dart';
 import 'package:pikrous/presentation/pages/auth/login_page.dart';
-import 'package:pikrous/presentation/pages/doctors/become_doctor.dart';
+// import 'package:pikrous/presentation/pages/doctors/become_doctor.dart';
 import 'package:pikrous/presentation/pages/your_account_page.dart';
 
 import '../../helper/utils/colors.dart';

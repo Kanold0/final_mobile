@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:pikrous/helper/utils/colors.dart';
 import 'package:pikrous/presentation/items/search_bar.dart';
-import 'package:pikrous/presentation/pages/all_doctors_page.dart';
+// import 'package:pikrous/presentation/pages/all_doctors_page.dart';
 
 class AllDietbetes extends StatefulWidget {
   const AllDietbetes({super.key});

@@ -43,8 +43,8 @@ List<String> categories = [
 List<String> categoriesImage = [
   'lib/assets/images/foodlogo.jpg',
   'lib/assets/images/diet_food.png',
-  'lib/assets/images/old_food.jpg',
-  'lib/assets/images/vegan.jpg',
+  'lib/assets/images/elderly_icon.png',
+  'lib/assets/images/vegan_icon.png',
   'lib/assets/images/diet.png',
 ];
 
