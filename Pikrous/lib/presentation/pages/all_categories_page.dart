@@ -1,40 +1,24 @@
-// ignore_for_file: use_full_hex_values_for_flutter_colors
-
 import 'package:flutter/material.dart';
-import 'package:pikrous/helper/utils/colors.dart';
+import 'package:pikrous/presentation/pages/diet_food.dart';
+import 'package:pikrous/presentation/pages/elderly_food.dart';
 import 'package:pikrous/presentation/items/search_bar.dart';
-import 'package:pikrous/presentation/pages/all_doctors_page.dart';
+import 'package:pikrous/presentation/pages/vegan_page.dart';
 
-class AllCategories extends StatefulWidget {
-  const AllCategories({super.key});
+class AllCategories extends StatelessWidget {
+  const AllCategories({Key? key}) : super(key: key);
 
-  @override
-  State<AllCategories> createState() => _AllCategoriesState();
-}
-
-List<String> problems = [
-  'Grenn food',
-  'Menstraution Probm',
-  'Uterus',
-  'Pregnancy Issue',
-  'Breast Issue',
-];
-
-class _AllCategoriesState extends State<AllCategories> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-          ),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: const Text('Category'),
+        title: const Text('Food Category'),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(40),
           child: Row(
@@ -45,7 +29,7 @@ class _AllCategoriesState extends State<AllCategories> {
                 decoration: const BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
-                      color: primaryColor,
+                      color: Colors.blue, // Change color to your preferred color
                       width: 2.0,
                     ),
                   ),
@@ -57,7 +41,7 @@ class _AllCategoriesState extends State<AllCategories> {
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w700,
-                      color: primaryColor,
+                      color: Colors.blue, // Change color to your preferred color
                     ),
                   ),
                 ),
@@ -73,39 +57,93 @@ class _AllCategoriesState extends State<AllCategories> {
         child: Column(
           children: [
             const SearchBarInput(label: 'Search food'),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Expanded(
-              child: ListView.builder(
-                itemCount: problems.length,
-                itemBuilder: ((context, index) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 70,
-                    margin: EdgeInsets.only(top: index > 0 ? 20 : 0),
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: const Color(0XFFFEEEEEE), width: 2.0),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          width: 50,
-                          height: 50,
-                          child: Image.asset('lib/assets/images/food.png'),
+              child: ListView(
+                children: [
+                  _buildCategoryItem(
+                    context,
+                    'Diet Food',
+                    'lib/assets/images/diet_food.png',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DietFoodPage(),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 30),
-                          child: Text(problems[index],
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500)),
+                      );
+                    },
+                  ),
+                  _buildCategoryItem(
+                    context,
+                    'Elderly Food',
+                    'lib/assets/images/elderly_icon.png',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ElderlyFoodPage(),
                         ),
-                      ],
-                    ),
-                  );
-                }),
+                      );
+                    },
+                  ),
+                  _buildCategoryItem(
+                    context,
+                    'Vegan Food',
+                    'lib/assets/images/vegan_icon.png',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VeganFoodPage(),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCategoryItem(
+    BuildContext context,
+    String categoryName,
+    String imagePath,
+    VoidCallback onTap,
+  ) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 70,
+      margin: const EdgeInsets.only(top: 20),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: const Color(0XFFFEEEEEE),
+          width: 2.0,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              width: 50,
+              height: 50,
+              child: Image.asset(imagePath),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 30),
+              child: Text(
+                categoryName,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
           ],

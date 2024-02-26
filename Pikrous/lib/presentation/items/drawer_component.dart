@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pikrous/helper/utils/preference.dart';
 import 'package:pikrous/presentation/pages/auth/login_page.dart';
-import 'package:pikrous/presentation/pages/doctors/become_doctor.dart';
+// import 'package:pikrous/presentation/pages/doctors/become_doctor.dart';
 import 'package:pikrous/presentation/pages/your_account_page.dart';
 
 import '../../helper/utils/colors.dart';
@@ -85,34 +85,34 @@ class _DrawerComponentState extends State<DrawerComponent> {
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
-        InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const BecomeDoctors()));
-          },
-          child: SizedBox(
-            height: 50,
-            child: Row(
-              children: [
-                FaIcon(
-                  FontAwesomeIcons.userDoctor,
-                  size: 18,
-                  color: primaryColor.withOpacity(0.63),
-                ),
-                const SizedBox(
-                  width: 28,
-                ),
-                const Text('Become a Doctor')
-              ],
-            ),
-          ),
-        ),
+        // InkWell(
+        //   onTap: () {
+        //     Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //             builder: (context) => const BecomeDoctors()));
+        //   },
+        //   child: SizedBox(
+        //     height: 50,
+        //     child: Row(
+        //       children: [
+        //         FaIcon(
+        //           FontAwesomeIcons.userDoctor,
+        //           size: 18,
+        //           color: primaryColor.withOpacity(0.63),
+        //         ),
+        //         const SizedBox(
+        //           width: 28,
+        //         ),
+        //         const Text('Become a Doctor')
+        //       ],
+        //     ),
+        //   ),
+        // ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         InkWell(
           onTap: () {},

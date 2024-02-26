@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:developer';
 
@@ -45,6 +47,7 @@ class Auth {
         'password': password,
       }),
     );
+    // ignore: avoid_print
     print(response.statusCode);
 
     if (response.statusCode == 200) {
