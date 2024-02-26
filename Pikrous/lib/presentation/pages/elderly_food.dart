@@ -1,39 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ElderlyFoodPage extends StatefulWidget {
-  @override
-  _ElderlyFoodPageState createState() => _ElderlyFoodPageState();
-}
-
-class _ElderlyFoodPageState extends State<ElderlyFoodPage> {
-  late List<String> foods;
-  late List<String> filteredFoods;
-  late List<bool> isFavorite;
-
-  TextEditingController _searchController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    foods = [
-      'Porridge',
-      'Mashed Potatoes',
-      'Steamed Vegetables',
-      'Fish Soup'
-    ];
-    filteredFoods = List.from(foods);
-    isFavorite = List.filled(foods.length, false);
-    _searchController.addListener(_onSearchChanged);
-  }
-
-  void _onSearchChanged() {
-    String searchTerm = _searchController.text.toLowerCase();
-    setState(() {
-      filteredFoods =
-          foods.where((food) => food.toLowerCase().contains(searchTerm)).toList();
-    });
-  }
-
+class ElderlyFoodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,200 +13,175 @@ class _ElderlyFoodPageState extends State<ElderlyFoodPage> {
         ),
         title: Text('Elderly Food'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search Food',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search Food',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: MediaQuery.of(context).size.width ~/ 150,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-              itemCount: filteredFoods.length,
-              itemBuilder: (context, index) {
-                return _buildFoodItem(filteredFoods[index], index);
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: _buildFoodContainer(
+                    imagePath: 'lib/assets/images/e1-a.png',
+                    foodName: 'Porridge',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FoodDetailPage(
+                            foodName: 'Porridge',
+                            ingredients: _getPorridgeIngredients(),
+                            instructions: _getPorridgeInstructions(),
+                            imagePath: 'lib/assets/images/e1-b.png',
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: _buildFoodContainer(
+                    imagePath: 'lib/assets/images/e2-a.png',
+                    foodName: 'Mashed Potatoes',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FoodDetailPage(
+                            foodName: 'Mashed Potatoes',
+                            ingredients: _getMashedPotatoesIngredients(),
+                            instructions: _getMashedPotatoesInstructions(),
+                            imagePath: 'lib/assets/images/e2-b.png',
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildFoodContainer(
+                    imagePath: 'lib/assets/images/e3-a.png',
+                    foodName: 'Vegetables',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FoodDetailPage(
+                            foodName: 'Vegetables',
+                            ingredients: _getVegetablesIngredients(),
+                            instructions: _getVegetablesInstructions(),
+                            imagePath: 'lib/assets/images/e3-b.png',
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: _buildFoodContainer(
+                    imagePath: 'lib/assets/images/e4-a.png',
+                    foodName: 'Fish Soup',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FoodDetailPage(
+                            foodName: 'Fish Soup',
+                            ingredients: _getFishSoupIngredients(),
+                            instructions: _getFishSoupInstructions(),
+                            imagePath: 'lib/assets/images/e4-b.png',
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildFoodItem(String foodName, int index) {
-    return Stack(
-      children: [
-        Container(
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
+  Widget _buildFoodContainer({required String imagePath, required String foodName, required VoidCallback onPressed}) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/elderly_food_placeholder.png',
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(height: 10),
-              Text(
-                foodName,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FoodDetailPage(foodName: foodName),
-                    ),
-                  );
-                },
-                child: Text('Details'),
-              ),
-            ],
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            imagePath,
+            width: 100,
+            height: 100,
+            fit: BoxFit.cover,
           ),
-        ),
-        Positioned(
-          top: 10,
-          right: 10,
-          child: IconButton(
-            onPressed: () {
-              setState(() {
-                isFavorite[index] = !isFavorite[index];
-              });
-            },
-            icon: Icon(
-              isFavorite[index] ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite[index] ? Colors.red : null,
+          SizedBox(height: 10),
+          Text(
+            foodName,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ),
-      ],
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: onPressed,
+            child: Text('Details'),
+          ),
+        ],
+      ),
     );
   }
 }
 
 class FoodDetailPage extends StatelessWidget {
   final String foodName;
+  final List<String> ingredients;
+  final List<String> instructions;
+  final String imagePath;
 
-  const FoodDetailPage({Key? key, required this.foodName}) : super(key: key);
+  const FoodDetailPage({Key? key, required this.foodName, required this.ingredients, required this.instructions, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Ingredients and instructions for each food
-    Map<String, Map<String, List<String>>> foodDetails = {
-      'Porridge': {
-        'Ingredients': [
-          '1/2 cup rolled oats',
-          '1 cup water or milk (dairy or plant-based)',
-          'Pinch of salt (optional)',
-          'Optional toppings: fruit, nuts, honey or maple syrup'
-        ],
-        'Instructions': [
-          'In a small saucepan, bring the water or milk to a boil.',
-          'Stir in the rolled oats and reduce heat to low.',
-          'Cook, stirring occasionally, for about 5 minutes or until desired consistency is reached.',
-          'Remove from heat and let it sit for a minute before serving.',
-          'Top with your favorite toppings if desired.'
-        ]
-      },
-      'Mashed Potatoes': {
-        'Ingredients': [
-          '2 large potatoes, peeled and cubed',
-          '2 tbsp vegan butter or olive oil',
-          '1/4 cup plant-based milk',
-          'Salt and pepper to taste'
-        ],
-        'Instructions': [
-          'Place the potatoes in a large pot and cover with water.',
-          'Bring to a boil over high heat, then reduce the heat to medium-low and simmer for about 15 minutes or until potatoes are fork-tender.',
-          'Drain the potatoes and return them to the pot.',
-          'Add vegan butter or olive oil, plant-based milk, salt, and pepper to the pot.',
-          'Mash the potatoes until smooth and creamy.',
-          'Adjust seasoning to taste and serve.'
-        ]
-      },
-      'Steamed Vegetables': {
-        'Ingredients': [
-          'Assorted vegetables (e.g., carrots, broccoli, cauliflower)',
-          'Water for steaming',
-          'Salt and pepper to taste'
-        ],
-        'Instructions': [
-          'Wash and prepare the vegetables by cutting them into bite-sized pieces.',
-          'Fill a large pot with a few inches of water and place a steamer basket inside.',
-          'Bring the water to a boil over high heat.',
-          'Add the vegetables to the steamer basket, cover, and steam for about 5-7 minutes or until tender-crisp.',
-          'Remove the vegetables from the steamer basket and season with salt and pepper to taste.',
-          'Serve hot as a side dish or with your favorite sauce.'
-        ]
-      },
-      'Fish Soup': {
-        'Ingredients': [
-          '1 lb white fish fillets (e.g., cod, haddock)',
-          '4 cups vegetable broth',
-          '1 onion, chopped',
-          '2 carrots, sliced',
-          '2 celery stalks, sliced',
-          '1 cup diced tomatoes',
-          '2 cloves garlic, minced',
-          '1 tsp dried thyme',
-          'Salt and pepper to taste'
-        ],
-        'Instructions': [
-          'In a large pot, heat some olive oil over medium heat.',
-          'Add the chopped onion, carrots, and celery to the pot and cook until softened, about 5 minutes.',
-          'Add the minced garlic and cook for another minute until fragrant.',
-          'Stir in the vegetable broth, diced tomatoes, and dried thyme.',
-          'Bring the soup to a simmer, then reduce the heat to low and let it cook for about 10 minutes.',
-          'Gently add the fish fillets to the pot and let them simmer in the soup for about 5-7 minutes or until cooked through.',
-          'Season the soup with salt and pepper to taste.',
-          'Serve hot, garnished with fresh herbs if desired.'
-        ]
-      },
-    };
-
-    Map<String, List<String>>? details = foodDetails[foodName];
-    List<String>? ingredients = details?['Ingredients'];
-    List<String>? instructions = details?['Instructions'];
-
     return Scaffold(
       appBar: AppBar(
         title: Text(foodName),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -247,41 +189,48 @@ class FoodDetailPage extends StatelessWidget {
               width: double.infinity,
               height: 200,
               child: Image.asset(
-                'assets/elderly_food_placeholder.png',
+                imagePath,
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(height: 20),
-            Text(
-              'Ingredients:',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Ingredients:',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: ingredients.map((ingredient) {
+                      return Text('• $ingredient');
+                    }).toList(),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    'Instructions:',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: instructions.asMap().entries.map((entry) {
+                      int index = entry.key + 1;
+                      String instruction = entry.value;
+                      return Text('$index. $instruction');
+                    }).toList(),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(height: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: ingredients?.map((ingredient) {
-                return Text('• $ingredient');
-              }).toList() ?? [],
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Instructions:',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: instructions?.asMap().entries.map((entry) {
-                int index = entry.key + 1;
-                String instruction = entry.value;
-                return Text('$index. $instruction');
-              }).toList() ?? [],
             ),
           ],
         ),
@@ -290,3 +239,103 @@ class FoodDetailPage extends StatelessWidget {
   }
 }
 
+List<String> _getPorridgeIngredients() {
+  return [
+    '1/2 cup rolled oats',
+    '1 cup water or milk',
+    'Pinch of salt (optional)',
+    'Toppings of your choice: fruits, nuts, honey, cinnamon, etc.',
+  ];
+}
+
+List<String> _getPorridgeInstructions() {
+  return [
+    'In a small saucepan, bring the water or milk to a boil over medium-high heat.',
+    'Stir in the rolled oats and reduce the heat to medium-low. Cook, stirring occasionally, for about 5 minutes or until the oats are soft and creamy.',
+    'Remove from heat and let the porridge sit for a minute or two to thicken.',
+    'Serve hot with your favorite toppings.',
+  ];
+}
+
+List<String> _getMashedPotatoesIngredients() {
+  return [
+    '2 pounds potatoes (such as russet or Yukon gold)',
+    '1/4 cup vegan butter or olive oil',
+    '1/2 cup non-dairy milk (such as almond or soy)',
+    'Salt and pepper to taste',
+    'Optional add-ins: minced garlic, chopped chives, nutritional yeast',
+  ];
+}
+
+List<String> _getMashedPotatoesInstructions() {
+  return [
+    'Peel and chop the potatoes into small chunks.',
+    'Place the potatoes in a large pot and cover with cold water. Add a pinch of salt to the water.',
+    'Bring the water to a boil over high heat, then reduce the heat to medium-low and simmer for about 15 minutes or until the potatoes are fork-tender.',
+    'Drain the potatoes and return them to the pot.',
+    'Add the vegan butter or olive oil, non-dairy milk, salt, and pepper to the pot.',
+    'Mash the potatoes using a potato masher or fork until smooth and creamy. Add more non-dairy milk if needed to reach your desired consistency.',
+    'Stir in any optional add-ins, if using.',
+    'Taste and adjust seasoning as needed.',
+    'Serve hot as a side dish.',
+  ];
+}
+
+List<String> _getVegetablesIngredients() {
+  return [
+    'Assorted vegetables of your choice (e.g., carrots, broccoli, cauliflower, bell peppers, snap peas)',
+    '1-2 tablespoons olive oil or vegetable oil',
+    'Salt and pepper to taste',
+    'Optional seasonings: garlic powder, onion powder, paprika, Italian seasoning',
+  ];
+}
+
+List<String> _getVegetablesInstructions() {
+  return [
+    'Preheat your oven to 400°F (200°C).',
+    'Wash and chop the vegetables into bite-sized pieces.',
+    'Place the vegetables on a large baking sheet.',
+    'Drizzle the olive oil over the vegetables and toss to coat evenly. Season with salt, pepper, and any desired seasonings.',
+    'Spread the vegetables out in a single layer on the baking sheet.',
+    'Roast in the preheated oven for 20-25 minutes, stirring halfway through, or until the vegetables are tender and lightly browned.',
+    'Serve hot as a side dish or incorporate into other recipes.',
+  ];
+}
+
+List<String> _getFishSoupIngredients() {
+  return [
+    '1 tablespoon olive oil',
+    '1 onion, diced',
+    '2 carrots, peeled and sliced',
+    '2 celery stalks, sliced',
+    '2 cloves garlic, minced',
+    '6 cups vegetable broth or water',
+    '1 can (14 oz) diced tomatoes, undrained',
+    '1 teaspoon dried thyme',
+    '1 teaspoon dried rosemary',
+    '1 bay leaf',
+    'Salt and pepper to taste',
+    '1 cup frozen peas',
+    '8 oz firm tofu, diced (optional)',
+    'Fresh parsley, chopped, for garnish',
+  ];
+}
+
+List<String> _getFishSoupInstructions() {
+  return [
+    'In a large pot, heat the olive oil over medium heat. Add the diced onion, sliced carrots, and sliced celery. Cook, stirring occasionally, for about 5 minutes or until the vegetables are softened.',
+    'Add the minced garlic to the pot and cook for an additional 1 minute.',
+    'Pour in the vegetable broth (or water) and diced tomatoes with their juices. Stir in the dried thyme, dried rosemary, bay leaf, salt, and pepper.',
+    'Bring the soup to a boil, then reduce the heat to low and simmer, uncovered, for about 15-20 minutes or until the vegetables are tender.',
+    'Stir in the frozen peas and diced tofu, if using. Cook for another 5 minutes or until heated through.',
+    'Taste and adjust seasoning as needed. Remove the bay leaf before serving.',
+    'Ladle the hot soup into bowls and garnish with chopped fresh parsley.',
+    'Serve hot with crusty bread or crackers.',
+  ];
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: ElderlyFoodPage(),
+  ));
+}

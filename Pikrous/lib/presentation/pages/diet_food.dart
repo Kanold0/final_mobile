@@ -1,39 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DietFoodPage extends StatefulWidget {
-  @override
-  _DietFoodPageState createState() => _DietFoodPageState();
-}
-
-class _DietFoodPageState extends State<DietFoodPage> {
-  late List<String> foods;
-  late List<String> filteredFoods;
-  late List<bool> isFavorite;
-
-  TextEditingController _searchController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    foods = [
-      'Quinoa Salad',
-      'Avocado Toast',
-      'Chickpea Curry',
-      'Veggie Burger'
-    ];
-    filteredFoods = List.from(foods);
-    isFavorite = List.filled(foods.length, false);
-    _searchController.addListener(_onSearchChanged);
-  }
-
-  void _onSearchChanged() {
-    String searchTerm = _searchController.text.toLowerCase();
-    setState(() {
-      filteredFoods =
-          foods.where((food) => food.toLowerCase().contains(searchTerm)).toList();
-    });
-  }
-
+class DietFoodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,203 +13,250 @@ class _DietFoodPageState extends State<DietFoodPage> {
         ),
         title: Text('Diet Food'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Search Food',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search Food',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: MediaQuery.of(context).size.width ~/ 150,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-              itemCount: filteredFoods.length,
-              itemBuilder: (context, index) {
-                return _buildFoodItem(filteredFoods[index], index);
-              },
+            
+            Row(
+              children: [
+                Expanded(
+                  child: _buildFoodContainer(
+                    imagePath: 'lib/assets/images/d1-a.png',
+                    foodName: 'Quinoa Salad',
+                    onPressed: () {
+                      // Handle detail button pressed for Quinoa Salad
+                      _navigateToFoodDetail(context, 'Quinoa Salad', _getQuinoaSaladIngredients(), _getQuinoaSaladInstructions(), 'lib/assets/images/d1-b.jpg');
+                    },
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: _buildFoodContainer(
+                    imagePath: 'lib/assets/images/d2-a.png',
+                    foodName: 'Avocado Toast',
+                    onPressed: () {
+                      // Handle detail button pressed for Avocado Toast
+                      _navigateToFoodDetail(context, 'Avocado Toast', _getAvocadoToastIngredients(), _getAvocadoToastInstructions(), 'lib/assets/images/d2-b.png');
+                    },
+                  ),
+                ),
+              ],
             ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildFoodContainer(
+                    imagePath: 'lib/assets/images/d3-a.png',
+                    foodName: 'Chickpea Curry',
+                    onPressed: () {
+                      // Handle detail button pressed for Chickpea Curry
+                      _navigateToFoodDetail(context, 'Chickpea Curry', _getChickpeaCurryIngredients(), _getChickpeaCurryInstructions(), 'lib/assets/images/d3-a.png');
+                    },
+                  ),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: _buildFoodContainer(
+                    imagePath: 'lib/assets/images/d4-a.png',
+                    foodName: 'Veggie Burger',
+                    onPressed: () {
+                      // Handle detail button pressed for Veggie Burger
+                      _navigateToFoodDetail(context, 'Veggie Burger', _getVeggieBurgerIngredients(), _getVeggieBurgerInstructions(), 'lib/assets/images/d4-b.png');
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFoodContainer({required String imagePath, required String foodName, required VoidCallback onPressed}) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            imagePath,
+            width: 100,
+            height: 100,
+            fit: BoxFit.cover,
+          ),
+          SizedBox(height: 10),
+          Text(
+            foodName,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: onPressed,
+            child: Text('Details'),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildFoodItem(String foodName, int index) {
-    return Stack(
-      children: [
-        Container(
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/old_food.jpg',
-                width: 80,
-                height: 80,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(height: 10),
-              Text(
-                foodName,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FoodDetailPage(foodName: foodName),
-                    ),
-                  );
-                },
-                child: Text('Details'),
-              ),
-            ],
-          ),
+  void _navigateToFoodDetail(BuildContext context, String foodName, List<String> ingredients, List<String> instructions, String imagePath) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FoodDetailPage(
+          foodName: foodName,
+          ingredients: ingredients,
+          instructions: instructions,
+          imagePath: imagePath,
         ),
-        Positioned(
-          top: 10,
-          right: 10,
-          child: IconButton(
-            onPressed: () {
-              setState(() {
-                isFavorite[index] = !isFavorite[index];
-              });
-            },
-            icon: Icon(
-              isFavorite[index] ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite[index] ? Colors.red : null,
-            ),
-          ),
-        ),
-      ],
+      ),
     );
+  }
+
+  List<String> _getQuinoaSaladIngredients() {
+    return [
+      '1 cup quinoa',
+      '1 1/2 cups water',
+      '1/4 cup olive oil',
+      '1/4 cup lemon juice',
+      '1 teaspoon Dijon mustard',
+      '1/4 teaspoon salt',
+      '1/8 teaspoon black pepper',
+      '1/4 cup chopped fresh parsley',
+      '1/2 cup chopped cucumber',
+      '1/2 cup halved cherry tomatoes',
+      '1/4 cup chopped red onion',
+      '1/4 cup chopped bell pepper',
+      '1/4 cup chopped fresh cilantro',
+    ];
+  }
+
+  List<String> _getQuinoaSaladInstructions() {
+    return [
+      'Rinse quinoa under cold water until the water runs clear. Combine quinoa and water in a saucepan; bring to a boil. Reduce heat to medium-low, cover, and simmer until quinoa is tender and water has been absorbed, 15 to 20 minutes. Set aside to cool.',
+      'Whisk olive oil, lemon juice, Dijon mustard, salt, and black pepper together in a bowl until smooth; drizzle over cooled quinoa. Stir to coat quinoa in dressing. Fold parsley, cucumber, tomatoes, red onion, bell pepper, and cilantro into quinoa mixture until evenly distributed. Serve immediately or chill in the refrigerator.',
+    ];
+  }
+
+  List<String> _getAvocadoToastIngredients() {
+    return [
+      '2 slices whole grain bread',
+      '1 ripe avocado',
+      '1 small lemon, juiced',
+      '1/4 teaspoon red pepper flakes',
+      'Salt and black pepper to taste',
+      'Optional toppings: cherry tomatoes, sliced radishes, microgreens, sesame seeds',
+    ];
+  }
+
+  List<String> _getAvocadoToastInstructions() {
+    return [
+      'Toast the bread slices to your desired level of crispiness.',
+      'Cut the avocado in half, remove the pit, and scoop the flesh into a bowl.',
+      'Mash the avocado with a fork and mix in the lemon juice, red pepper flakes, salt, and black pepper.',
+      'Spread the mashed avocado evenly onto each slice of toast.',
+      'Top with your desired toppings and enjoy!',
+    ];
+  }
+
+  List<String> _getChickpeaCurryIngredients() {
+    return [
+      '1 tablespoon olive oil',
+      '1 onion, diced',
+      '2 cloves garlic, minced',
+      '1 tablespoon fresh ginger, grated',
+      '1 tablespoon curry powder',
+      '1 teaspoon ground cumin',
+      '1/2 teaspoon ground turmeric',
+      '1/4 teaspoon cayenne pepper',
+      '1 can (15 ounces) chickpeas, drained and rinsed',
+      '1 can (14.5 ounces) diced tomatoes',
+      '1 can (13.5 ounces) coconut milk',
+      'Salt and black pepper to taste',
+      'Fresh cilantro, for garnish',
+    ];
+  }
+
+  List<String> _getChickpeaCurryInstructions() {
+    return [
+      'Heat olive oil in a large skillet over medium heat. Add the diced onion and cook until softened, about 5 minutes.',
+      'Add the minced garlic, grated ginger, curry powder, cumin, turmeric, and cayenne pepper to the skillet. Cook for 1 minute, stirring constantly, until fragrant.',
+      'Add the chickpeas, diced tomatoes (with juices), and coconut milk to the skillet. Stir to combine.',
+      'Bring the mixture to a simmer, then reduce the heat to low and let it simmer gently for about 15-20 minutes, stirring occasionally, until the flavors have melded together and the sauce has thickened slightly.',
+      'Season with salt and black pepper to taste. Serve the curry hot, garnished with fresh cilantro, over cooked rice or with naan bread.',
+    ];
+  }
+
+  List<String> _getVeggieBurgerIngredients() {
+    return [
+      '1 can (15 ounces) black beans, drained and rinsed',
+      '1/2 cup breadcrumbs',
+      '1/4 cup finely chopped onion',
+      '1/4 cup grated carrot',
+      '1/4 cup chopped fresh parsley',
+      '1 teaspoon garlic powder',
+      '1 teaspoon smoked paprika',
+      '1/2 teaspoon cumin',
+      'Salt and black pepper to taste',
+      'Optional toppings: lettuce, tomato, onion, avocado, vegan cheese',
+      'Burger buns',
+    ];
+  }
+
+  List<String> _getVeggieBurgerInstructions() {
+    return [
+      'Preheat your oven to 375°F (190°C). Line a baking sheet with parchment paper or lightly grease it with oil.',
+      'In a large mixing bowl, mash the black beans with a fork or potato masher until mostly smooth but still slightly chunky.',
+      'Add the breadcrumbs, chopped onion, grated carrot, chopped parsley, garlic powder, smoked paprika, cumin, salt, and black pepper to the bowl. Mix until well combined.',
+      'Divide the mixture into 4 equal portions and shape each portion into a patty.',
+      'Place the patties on the prepared baking sheet and bake for 20-25 minutes, flipping halfway through, until the burgers are firm and golden brown on the outside.',
+      'Serve the veggie burgers on burger buns with your favorite toppings and condiments. Enjoy!',
+    ];
   }
 }
 
 class FoodDetailPage extends StatelessWidget {
   final String foodName;
+  final List<String> ingredients;
+  final List<String> instructions;
+  final String imagePath;
 
-  const FoodDetailPage({Key? key, required this.foodName}) : super(key: key);
+  const FoodDetailPage({Key? key, required this.foodName, required this.ingredients, required this.instructions, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Ingredients and instructions for each food
-    Map<String, List<String>> foodDetails = {
-      'Quinoa Salad': [
-        '1 cup quinoa',
-        '2 cups water',
-        '1 cup cherry tomatoes, halved',
-        '1 cucumber, diced',
-        '1/4 cup red onion, diced',
-        '1/4 cup fresh parsley, chopped',
-        '2 tablespoons olive oil',
-        '2 tablespoons lemon juice',
-        'Salt and pepper to taste'
-      ],
-      'Avocado Toast': [
-        '2 slices whole grain bread',
-        '1 ripe avocado',
-        '1/2 lemon, juiced',
-        'Salt and pepper to taste',
-        'Optional toppings: cherry tomatoes, red pepper flakes, microgreens'
-      ],
-      'Chickpea Curry': [
-        '1 can chickpeas, drained and rinsed',
-        '1 can coconut milk',
-        '1 cup diced tomatoes',
-        '1 onion, chopped',
-        '2 cloves garlic, minced',
-        '1 inch ginger, grated',
-        '1 tsp cumin',
-        '1 tsp turmeric',
-        '1 tsp coriander',
-        '1 tsp garam masala',
-        'Salt and pepper to taste'
-      ],
-      'Veggie Burger': [
-        '1 can black beans, drained and rinsed',
-        '1 cup rolled oats',
-        '1/2 onion, finely chopped',
-        '2 cloves garlic, minced',
-        '2 tbsp ground flaxseed meal',
-        '1 tsp chili powder',
-        '1 tsp cumin',
-        '1/2 tsp paprika',
-        'Salt and pepper to taste'
-      ],
-    };
-
-    Map<String, List<String>> cookingInstructions = {
-      'Quinoa Salad': [
-        'Rinse quinoa under cold water using a fine mesh strainer.',
-        'In a medium saucepan, combine quinoa and water. Bring to a boil, then reduce heat to low, cover, and simmer for 15-20 minutes or until quinoa is tender and water is absorbed.',
-        'Fluff cooked quinoa with a fork and transfer to a large mixing bowl. Let it cool.',
-        'Once quinoa is cooled, add cherry tomatoes, cucumber, red onion, and fresh parsley to the bowl.',
-        'In a small bowl, whisk together olive oil, lemon juice, salt, and pepper. Pour dressing over the salad and toss to combine.',
-        'Serve chilled or at room temperature. Enjoy your quinoa salad!'
-      ],
-      'Avocado Toast': [
-        'Toast the bread slices until golden brown and crispy.',
-        'While the bread is toasting, scoop the avocado flesh into a small bowl and mash it with a fork until smooth.',
-        'Add lemon juice, salt, and pepper to the mashed avocado and mix well.',
-        'Spread the mashed avocado evenly onto the toasted bread slices.',
-        'Top with optional toppings such as cherry tomatoes, red pepper flakes, or microgreens if desired.',
-        'Serve immediately and enjoy!'
-      ],
-      'Chickpea Curry': [
-        'Heat oil in a large skillet over medium heat. Add chopped onions and cook until softened.',
-        'Add minced garlic and grated ginger to the skillet and cook for another minute.',
-        'Stir in cumin, turmeric, coriander, and garam masala. Cook for about 30 seconds until fragrant.',
-        'Add diced tomatoes and cook until they start to break down.',
-        'Pour in coconut milk and drained chickpeas. Bring to a simmer and let it cook for about 10-15 minutes, stirring occasionally.',
-        'Season with salt and pepper to taste.',
-        'Garnish with chopped fresh cilantro if desired.',
-        'Serve hot over rice or with naan bread. Enjoy your delicious chickpea curry!'
-      ],
-      'Veggie Burger': [
-        'In a food processor, pulse black beans until mashed but still chunky.',
-        'Transfer mashed beans to a large mixing bowl. Add rolled oats, chopped onion, minced garlic, ground flaxseed meal, chili powder, cumin, paprika, salt, and pepper.',
-        'Mix until well combined. If the mixture is too dry, add a splash of water.',
-        'Divide the mixture into equal portions and shape into burger patties.',
-        'Heat a skillet over medium heat and lightly oil the surface. Cook the veggie burgers for 4-5 minutes on each side, or until golden brown and heated through.',
-        'Serve the veggie burgers on buns with your favorite toppings and enjoy!'
-      ],
-    };
-
-    List<String>? ingredients = foodDetails[foodName];
-    List<String>? instructions = cookingInstructions[foodName];
-
     return Scaffold(
       appBar: AppBar(
         title: Text(foodName),
@@ -255,7 +269,7 @@ class FoodDetailPage extends StatelessWidget {
               width: double.infinity,
               height: 200,
               child: Image.asset(
-                'assets/images/old_food.jpg',
+                imagePath,
                 fit: BoxFit.cover,
               ),
             ),
@@ -274,9 +288,9 @@ class FoodDetailPage extends StatelessWidget {
                   SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: ingredients?.map((ingredient) {
+                    children: ingredients.map((ingredient) {
                       return Text('• $ingredient');
-                    }).toList() ?? [],
+                    }).toList(),
                   ),
                   SizedBox(height: 20),
                   Text(
@@ -289,11 +303,11 @@ class FoodDetailPage extends StatelessWidget {
                   SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: instructions?.asMap().entries.map((entry) {
+                    children: instructions.asMap().entries.map((entry) {
                       int index = entry.key + 1;
                       String instruction = entry.value;
                       return Text('$index. $instruction');
-                    }).toList() ?? [],
+                    }).toList(),
                   ),
                 ],
               ),
@@ -305,3 +319,8 @@ class FoodDetailPage extends StatelessWidget {
   }
 }
 
+void main() {
+  runApp(MaterialApp(
+    home: DietFoodPage(),
+  ));
+}
