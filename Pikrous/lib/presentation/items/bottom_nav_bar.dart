@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pikrous/presentation/pages/calendar_page.dart';
+import 'package:pikrous/presentation/pages/chatbot_page.dart';
 import 'package:pikrous/presentation/pages/home.dart';
 
 import '../../helper/utils/colors.dart';
@@ -98,7 +99,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               child: Center(
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatbotApp(),
+                      ),
+                    );
+                  },
                   icon: const Icon(
                     Icons.message,
                     size: 40,

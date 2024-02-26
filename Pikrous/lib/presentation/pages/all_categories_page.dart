@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pikrous/presentation/pages/all_dietbete_page.dart';
 import 'package:pikrous/presentation/pages/diet_food.dart';
 import 'package:pikrous/presentation/pages/elderly_food.dart';
 import 'package:pikrous/presentation/items/search_bar.dart';
@@ -100,6 +101,19 @@ class AllCategories extends StatelessWidget {
                       );
                     },
                   ),
+                  _buildCategoryItem(
+                    context,
+                    'Vegan Food',
+                    'lib/assets/images/Diet1.png',
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DiabetesFoodPage(),
+                        ),
+                      );
+                    },
+                  ),                  
                 ],
               ),
             ),

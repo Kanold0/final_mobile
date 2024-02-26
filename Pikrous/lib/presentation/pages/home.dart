@@ -45,7 +45,7 @@ List<String> categoriesImage = [
   'lib/assets/images/diet_food.png',
   'lib/assets/images/elderly_icon.png',
   'lib/assets/images/vegan_icon.png',
-  'lib/assets/images/diet.png',
+  'lib/assets/images/diet_food.png',
 ];
 
 class _HomePageState extends State<HomePage> {
@@ -392,7 +392,7 @@ class _HomePageState extends State<HomePage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: ((context) =>
-                                                    const AllDietbetes())));
+                                                    DiabetesFoodPage())));
                                       }
                                     },
                                     child: Column(
@@ -426,38 +426,6 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   );
                                 }),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 200,
-                            ),
-                            InkWell(
-                              onTap: (
-                                
-                              ) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: ((context) =>
-                                        const CalendarPage()),
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: 50,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  color: primaryColor.withOpacity(0.63),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "Create Food Schedule",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 24),
-                                  ),
-                                ),
                               ),
                             ),
                             const SizedBox(
