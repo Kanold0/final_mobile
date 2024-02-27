@@ -42,7 +42,7 @@ class AllCategories extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w700,
-                      color: Colors.blue, // Change color to your preferred color
+                      color: Colors.green, // Change color to your preferred color
                     ),
                   ),
                 ),

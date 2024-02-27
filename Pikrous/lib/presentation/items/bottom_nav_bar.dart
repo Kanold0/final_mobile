@@ -1,9 +1,10 @@
 // ignore_for_file: use_full_hex_values_for_flutter_colors
 
 import 'package:flutter/material.dart';
-import 'package:pikrous/presentation/pages/calendar_page.dart';
 import 'package:pikrous/presentation/pages/chatbot_page.dart';
+import 'package:pikrous/presentation/pages/foodtracking.dart';
 import 'package:pikrous/presentation/pages/home.dart';
+import 'package:pikrous/presentation/pages/your_account_page.dart';
 
 import '../../helper/utils/colors.dart';
 
@@ -77,12 +78,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const CalendarPage(),
+                        builder: (context) => FoodTrackingPage(),
                       ),
                     );
                   },
                   icon: const Icon(
-                    Icons.calendar_month_rounded,
+                    Icons.fastfood_outlined,
                     size: 40,
                   ),
                   color: primaryColor,
@@ -103,7 +104,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChatbotApp(),
+                        builder: (context) => ChatbotScreen(),
                       ),
                     );
                   },
@@ -120,14 +121,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: widget.index == 5 ? const Color(0xfffeeeeee) : Colors.white,
+                color: widget.index == 3 ? const Color(0xfffeeeeee) : Colors.white,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Center(
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => YourAccountPage(),
+                      ),
+                    );
+                  },
                   icon: const Icon(
-                    Icons.people_outline_sharp,
+                    Icons.person_2,
                     size: 40,
                   ),
                   color: primaryColor,

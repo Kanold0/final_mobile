@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FoodItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,5 @@ Route::get('/alldoctor', [MainController::class, 'alldoctor']);
 Route::post('/createdoctor', [MainController::class, 'createdoctor']);
 Route::delete('/deletedoctor/{id}', [MainController::class, 'deletedoctor']);
 Route::put('/editdoctor/{id}', [MainController::class, 'editdoctor']);
+
+Route::resource('food-items', FoodItemController::class);

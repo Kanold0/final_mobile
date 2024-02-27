@@ -12,12 +12,11 @@ import 'package:pikrous/presentation/items/drawer_component.dart';
 import 'package:pikrous/presentation/items/search_bar.dart';
 import 'package:pikrous/presentation/pages/admin/create_doctor.dart';
 import 'package:pikrous/presentation/pages/all_categories_page.dart';
-import 'package:pikrous/presentation/pages/all_doctors_page.dart';
-import 'package:pikrous/presentation/pages/auth/login_page.dart';
-import 'package:pikrous/presentation/pages/doctor_page.dart';
-import 'package:pikrous/presentation/pages/doctors/view_all_doctor.dart';
-import 'package:pikrous/presentation/pages/calendar_page.dart';
 import 'package:pikrous/presentation/pages/all_dietbete_page.dart';
+// import 'package:pikrous/presentation/pages/all_doctors_page.dart';
+import 'package:pikrous/presentation/pages/auth/login_page.dart';
+// // import 'package:pikrous/presentation/pages/doctor_page.dart';
+// import 'package:pikrous/presentation/pages/all_dietbete_page.dart';
 import 'package:pikrous/presentation/pages/diet_food.dart';
 import 'package:pikrous/presentation/pages/vegan_page.dart';
 import 'package:pikrous/presentation/pages/elderly_food.dart';
@@ -215,12 +214,12 @@ class _HomePageState extends State<HomePage> {
                       height: 20,
                     ),
                     InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ViewALlDoctors()));
-                      },
+                      // onTap: () {
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => const ViewALlDoctors()));
+                      // },
                       child: Container(
                         height: 100,
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -435,12 +434,12 @@ class _HomePageState extends State<HomePage> {
                               alignment: Alignment.centerRight,
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const AllDoctors(),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => const AllDoctors(),
+                                  //   ),
+                                  // );
                                 },
                                 child: Container(
                                   width: 100,
@@ -468,12 +467,12 @@ class _HomePageState extends State<HomePage> {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const DoctorPage(),
-                                  ),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => const DoctorPage(),
+                                //   ),
+                                // );
                               },
                               child: Container(
                                 margin: EdgeInsets.only(

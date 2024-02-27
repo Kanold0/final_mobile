@@ -7,7 +7,7 @@ import 'package:pikrous/helper/utils/colors.dart';
 import 'package:pikrous/presentation/items/search_bar.dart';
 import 'package:pikrous/presentation/pages/all_categories_page.dart';
 import 'package:pikrous/presentation/pages/doctor_page.dart';
-import 'package:pikrous/presentation/pages/doctors/view_all_doctor.dart';
+// import 'package:pikrous/presentation/pages/doctors/view_all_doctor.dart';
 
 import '../../api/endpoint/home_endpoint.dart';
 import '../../helper/utils/constants.dart';
@@ -54,10 +54,10 @@ class _AllDoctorsState extends State<AllDoctors> {
                 .map((item) => item['name'] ?? '')
                 .cast<String>()
                 .toList();
-            expertise = doctors
-                .map((item) => item['expertise'] ?? '')
-                .cast<String>()
-                .toList();
+            // expertise = doctors
+            //     .map((item) => item['expertise'] ?? '')
+            //     .cast<String>()
+            //     .toList();
           } else {
             print('Invalid data structure: $data');
             names = [];

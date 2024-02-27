@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pikrous/api/endpoint/doctor_endpoint.dart';
-import 'package:pikrous/presentation/pages/doctors/view_all_doctor.dart';
+// import 'package:pikrous/presentation/pages/doctors/view_all_doctor.dart';
 
 import '../../../helper/utils/colors.dart';
 import 'package:http/http.dart' as http;
@@ -59,13 +59,13 @@ class _EditDoctorState extends State<EditDoctor> {
       }),
     );
 
-    if (response.statusCode == 200) {
-      print("User data updated in the database");
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const ViewALlDoctors()));
-    } else {
-      print("Failed to update user data: ${response.statusCode}");
-    }
+    // if (response.statusCode == 200) {
+    //   print("User data updated in the database");
+    //   Navigator.pushReplacement(
+    //       context, MaterialPageRoute(builder: (context) => const ViewALlDoctors()));
+    // } else {
+    //   print("Failed to update user data: ${response.statusCode}");
+    // }
   }
 
   @override

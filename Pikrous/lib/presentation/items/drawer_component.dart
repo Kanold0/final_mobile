@@ -6,7 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pikrous/helper/utils/preference.dart';
 import 'package:pikrous/presentation/pages/auth/login_page.dart';
 // import 'package:pikrous/presentation/pages/doctors/become_doctor.dart';
+import 'package:pikrous/presentation/pages/faqs_page.dart';
 import 'package:pikrous/presentation/pages/your_account_page.dart';
+import 'package:pikrous/presentation/pages/favorites_page.dart';
 
 import '../../helper/utils/colors.dart';
 
@@ -56,6 +58,8 @@ showLogoutDialog(context) {
 }
 
 class _DrawerComponentState extends State<DrawerComponent> {
+
+  bool isDarkTheme = false; // Define isDarkTheme here
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -87,47 +91,31 @@ class _DrawerComponentState extends State<DrawerComponent> {
         const SizedBox(
           height: 10,
         ),
-        // InkWell(
-        //   onTap: () {
-        //     Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //             builder: (context) => const BecomeDoctors()));
-        //   },
-        //   child: SizedBox(
-        //     height: 50,
-        //     child: Row(
-        //       children: [
-        //         FaIcon(
-        //           FontAwesomeIcons.userDoctor,
-        //           size: 18,
-        //           color: primaryColor.withOpacity(0.63),
-        //         ),
-        //         const SizedBox(
-        //           width: 28,
-        //         ),
-        //         const Text('Become a Doctor')
-        //       ],
-        //     ),
-        //   ),
-        // ),
+
         const SizedBox(
           height: 10,
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FavoritePage(),
+              ),
+            );
+          },
           child: SizedBox(
             height: 50,
             child: Row(
               children: [
                 Icon(
-                  Icons.language,
+                  Icons.info,
                   color: primaryColor.withOpacity(0.63),
                 ),
                 const SizedBox(
                   width: 20,
                 ),
-                const Text('Change Language')
+                const Text('About Us')
               ],
             ),
           ),
@@ -136,109 +124,31 @@ class _DrawerComponentState extends State<DrawerComponent> {
           height: 20,
         ),
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FaqsPage(),
+                  ),
+                );                
+          },
           child: SizedBox(
             height: 50,
             child: Row(
               children: [
                 Icon(
-                  Icons.settings,
+                  Icons.question_answer,
                   color: primaryColor.withOpacity(0.63),
                 ),
                 const SizedBox(
                   width: 20,
                 ),
-                const Text('Setting')
+                const Text('FAQs')
               ],
             ),
           ),
         ),
-        const SizedBox(
-          height: 20,
-        ),
-        InkWell(
-          onTap: () {},
-          child: Container(
-            margin: const EdgeInsets.only(left: 4),
-            height: 50,
-            child: Row(
-              children: [
-                FaIcon(
-                  FontAwesomeIcons.gift,
-                  size: 18,
-                  color: primaryColor.withOpacity(0.63),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Text('Rewards')
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        InkWell(
-          onTap: () {},
-          child: SizedBox(
-            height: 50,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.history,
-                  color: primaryColor.withOpacity(0.63),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Text('History')
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        InkWell(
-          onTap: () {},
-          child: SizedBox(
-            height: 50,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.credit_card,
-                  color: primaryColor.withOpacity(0.63),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Text('Payment Method')
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        InkWell(
-          onTap: () {},
-          child: SizedBox(
-            height: 50,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.delete,
-                  color: primaryColor.withOpacity(0.63),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Text('Delete Account')
-              ],
-            ),
-          ),
-        ),
+
         const SizedBox(
           height: 20,
         ),
