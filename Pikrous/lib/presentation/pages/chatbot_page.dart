@@ -53,7 +53,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavBar(index: 2),
+      bottomNavigationBar: BottomNavBar(index: 3),
     );
   }
 

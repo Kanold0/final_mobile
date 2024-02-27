@@ -10,13 +10,9 @@ import 'package:pikrous/helper/utils/constants.dart';
 import 'package:pikrous/helper/utils/preference.dart';
 import 'package:pikrous/presentation/items/drawer_component.dart';
 import 'package:pikrous/presentation/items/search_bar.dart';
-import 'package:pikrous/presentation/pages/admin/create_doctor.dart';
 import 'package:pikrous/presentation/pages/all_categories_page.dart';
 import 'package:pikrous/presentation/pages/all_dietbete_page.dart';
-// import 'package:pikrous/presentation/pages/all_doctors_page.dart';
 import 'package:pikrous/presentation/pages/auth/login_page.dart';
-// // import 'package:pikrous/presentation/pages/doctor_page.dart';
-// import 'package:pikrous/presentation/pages/all_dietbete_page.dart';
 import 'package:pikrous/presentation/pages/diet_food.dart';
 import 'package:pikrous/presentation/pages/vegan_page.dart';
 import 'package:pikrous/presentation/pages/elderly_food.dart';
@@ -169,12 +165,7 @@ class _HomePageState extends State<HomePage> {
                       height: 20,
                     ),
                     InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CreateDoctor()));
-                      },
+                    
                       child: Container(
                         height: 50,
                         padding: const EdgeInsets.symmetric(horizontal: 20),

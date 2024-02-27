@@ -57,7 +57,7 @@ void _showForgotPasswordBottomSheet(BuildContext context) {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  color: const Color(0xfff7d8bb7),
+                  color: Color.fromARGB(255, 27, 184, 126),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 height: 50,
@@ -111,7 +111,7 @@ void _showEnter4DigitsCode(BuildContext context) {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  color: const Color(0xfff7d8bb7),
+                  color: Color.fromARGB(255, 27, 184, 126),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 height: 50,
@@ -206,7 +206,7 @@ void _showResetPassword(BuildContext context) {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                      color: const Color(0xfff7d8bb7),
+                      color: Color.fromARGB(255, 27, 184, 126),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     height: 50,
@@ -316,12 +316,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const Center(
                   child: Text(
-                    'Find and consult with doctors you need in private',
-                    style: TextStyle(fontSize: 14, color: Color(0xfff808080)),
-                  ),
-                ),
-                const Center(
-                  child: Text(
                     'Your secret is safe with us!!!',
                     style: TextStyle(fontSize: 14, color: Color(0xfff808080)),
                   ),
@@ -329,73 +323,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 50,
                 ),
-                Row(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      height: 50, // Adjust height as needed
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          const Spacer(),
-                          Image.asset(
-                            'lib/assets/images/Google.png',
-                            width: 30,
-                            height: 30,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text('Google'),
-                          const Spacer(),
-                        ],
-                      ),
-                    ),
-                    const Spacer(),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          const Spacer(),
-                          Image.asset(
-                            'lib/assets/images/facebook.png',
-                            width: 30,
-                            height: 30,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text('Facebook'),
-                          const Spacer(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+
                 const SizedBox(
                   height: 30,
                 ),
@@ -474,7 +402,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                        color: const Color(0xfff7d8bb7),
+                        color: Color.fromARGB(255, 27, 184, 126),
                         borderRadius: BorderRadius.circular(10)),
                     height: 50,
                     child: const Center(
