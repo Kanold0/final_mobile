@@ -8,8 +8,7 @@ class ChatbotApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Healthify Assistant Bot',
+      title: 'Chatbot App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -32,17 +31,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            Text('Healthify Assistant Bot'),
-          ],
-        ),
+        title: Text('Chatbot'),
       ),
       body: Column(
         children: [
@@ -98,35 +87,15 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     String userInput = text.toLowerCase();
 
     // Bot responses based on user input
-    if (userInput.contains('diet') ||
-        userInput.contains('what is diet food')) {
-      response =
-          'Diet food includes healthy options like quinoa salad, avocado toast, chickpea curry, and veggie burger. Here are some recipes:';
-      // You can add links to recipes here
-    } else if (userInput.contains('vegan') ||
-        userInput.contains('what is vegan food')) {
-      response =
-          'Vegan diets exclude all animal products. Consider incorporating more plant-based foods like fruits, vegetables, grains, and legumes.';
-    } else if (userInput.contains('diabetes') ||
-        userInput.contains('what is diabetes food')) {
-      response =
-          'A diabetic diet typically involves monitoring carbohydrate intake, choosing foods with a low glycemic index, and portion control.';
-    } else if (userInput.contains('elderly') ||
-        userInput.contains('what is elderly food')) {
-      response =
-          'For elderly individuals, it\'s important to prioritize nutrient-dense foods that are easy to chew and digest. Consider foods rich in calcium and vitamin D for bone health.';
-    } else if (userInput.contains('hi') ||
-        userInput.contains('hello') ||
-        userInput.contains('hey')) {
-      response = 'Hello! How can I assist you today?';
-    } else if (userInput.contains('bye') || userInput.contains('bye bye')) {
-      response = 'Goodbye! Have a great day!';
-    } else if (userInput.contains('thank you') ||
-        userInput.contains('thanks')) {
-      response = 'You\'re welcome!';
-    } else if (userInput.contains('show me some menu')) {
-      response =
-          'Based on your preferences, I recommend trying quinoa salad, avocado toast, chickpea curry, or veggie burger.';
+    
+    if (userInput.contains('diet')) {
+      response = 'For a healthy diet, focus on balanced meals with plenty of fruits and vegetables.';
+    } else if (userInput.contains('vegan')) {
+      response = 'Vegan diets exclude all animal products. Consider incorporating more plant-based foods like fruits, vegetables, grains, and legumes.';
+    } else if (userInput.contains('diabetes')) {
+      response = 'A diabetic diet typically involves monitoring carbohydrate intake, choosing foods with a low glycemic index, and portion control.';
+    } else if (userInput.contains('elderly') || userInput.contains('senior')) {
+      response = 'For elderly individuals, it\'s important to prioritize nutrient-dense foods that are easy to chew and digest. Consider foods rich in calcium and vitamin D for bone health.';
     } else {
       response = 'I\'m sorry, I didn\'t understand that.';
     }
@@ -146,7 +115,6 @@ class ChatMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Column(
@@ -161,15 +129,12 @@ class ChatMessage extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: Text(
               text,
-              style: TextStyle(
-                color: isUser ? Colors.white : Colors.black,
-                fontSize: 20,
-              ),
+              style: TextStyle(color: isUser ? Colors.white : Colors.black),
             ),
           ),
           SizedBox(height: 4),
           Text(
-            isUser ? 'You' : 'Healthify Assistant Bot',
+            isUser ? 'You' : 'Bot',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ],

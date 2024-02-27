@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:pikrous/presentation/pages/calendar_page.dart';
 import 'package:pikrous/presentation/pages/chatbot_page.dart';
-import 'package:pikrous/presentation/pages/food_tracking.dart';
 import 'package:pikrous/presentation/pages/home.dart';
 
 import '../../helper/utils/colors.dart';
@@ -78,7 +77,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>FoodTrackingApp(),
+                        builder: (context) => const CalendarPage(),
                       ),
                     );
                   },
@@ -121,21 +120,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: widget.index == 3 ? const Color(0xfffeeeeee) : Colors.white,
+                color: widget.index == 5 ? const Color(0xfffeeeeee) : Colors.white,
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Center(
                 child: IconButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChatbotApp(),
-                      ),
-                    );
-                  },
+                  onPressed: () {},
                   icon: const Icon(
-                    Icons.message,
+                    Icons.people_outline_sharp,
                     size: 40,
                   ),
                   color: primaryColor,
